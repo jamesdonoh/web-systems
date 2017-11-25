@@ -1,0 +1,42 @@
+Other books to cite at random:
+- Chaffey, e-business and e-commerce management
+  https://geomart25.files.wordpress.com/2014/05/dave-chaffey-e-business-and-e-commerce-management-strategies-4th-ed-qwerty80.pdf
+- Using BPMN for modelling manufacturing processes (VSM etc.)
+  http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.412.7554&rep=rep1&type=pdf
+- Business models on the web
+  http://digitalenterprise.org/models/models.html
+
+Reading room requests:
+- Web services&SOA : 2nd ed (Papazoglou)
+
+
+Stair Reynolds:
+
+
+"An information system (IS) is a set of interrelated components that collect, manipulate, store and disseminate data and information and provide a feedback mechanism to meet an objective. It is the feedback mechanism that helps organizations achieve their goals, such as increasing profits or improving customer service."
+- Stair and Reynolds, 11e, p.4
+
+"Information is one of an organization's most valuable resources."
+- ibid, p.5
+
+"Turning data into information is a process, or a set of logically related tasks performed to achieve a defined outcome. The process of defining relationships among data to create useful information requries knowledge."
+- ibid, p.6
+(transformation process = applying knowledge by selecting/organizing/manipulating)
+
+Characteristics of valuable information: accessible, accurate, economical, timely, simple, etc.
+
+Importance of information quality - "any organisation that stresses the use of advanced information systems and sophisticated data analysis before information quality is doomed to make many wrong decisions."
+- p.6 (13e - Google)
+
+"An organization's technology infrastructure includes all the hardware, software, databases, networks, people and procedures that are configured to collect, manipulate, store and process data into information." (p.8, 11e)
+
+"Feedback is information from the system that is used to make changes to input or processing activities."
+
+
+---
+
+Papazoglou
+
+"There is no reason to do something oneself unless one is uniquely good at it." (goes on - bought externally) - p.55
+
+

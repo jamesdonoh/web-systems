@@ -1,0 +1,162 @@
+---
+references:
+- id: papazoglou
+  title: 'e-Business: Organizational and technical Foundations'
+  author:
+  - family: Papazoglou
+    given: Michael P.
+  - family: Ribbers
+    given: Pieter M.A.
+  type: book
+  publisher: John Wiley and Sons
+  publisher-place: Chichester
+  issued: 2006
+- id: stair
+  title: Principles of Information Systems
+  author:
+  - family: Stair
+    given: Ralph M.
+  - family: Reynolds
+    given: George W.
+  type: book
+  publisher: Cengage Learning
+  publisher-place: Boston, MA
+  edition: 11th Edition
+  issued: 2014
+- id: mymuesli
+  title: Our Story
+  author:
+  - literal: mymuesli GmbH
+  type: webpage
+  URL: https://uk.mymuesli.com/story
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 18
+- id: aalst
+  title: 'Modeling Business Processes: A Petri Net-Oriented Approach'
+  author:
+  - family: van der Aalst
+    given: Wil M.P.
+  - family: Stahl
+    given: Christian
+  type: book
+  publisher: MIT Press
+  publisher-place: Cambridge, MA
+  issued: 2011
+- id: kossak
+  title: 'A Rigorous Semantics for BPMN 2.0 Process Diagrams'
+  author:
+  - family: Kossak
+    given: F.
+  - family: Illibauer
+    given: C.
+  - family: Geist
+    given: V.
+  - family: Geist
+    given: V.
+  - family: Kubovy
+    given: J.
+  - family: Natschläger
+    given: C.
+  - family: Ziebermayr
+    given: Th.
+  - family: Kopetzky
+    given: T.
+  - family: Freudenthaler
+    given: B.
+  - family: Schewe
+    given: K.-D
+  type: book
+  publisher: Springer
+  issued: 2014
+- id: uml
+  title: OMG Unified Modeling Language
+  author:
+  - literal: OMG
+  type: webpage
+  URL: http://www.omg.org/spec/UML/2.5/
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 20
+- id: arlow
+  title: 'UML 2 and the Unified Process. Second Edition'
+  author:
+  - family: Arlow
+    given: J.
+  - family: Neustadt
+    given: I.
+  type: book
+  publisher: Addison-Wesley
+  publisher-place: Upper Saddle River, NJ
+  edition: 2nd Edition
+  issued: 2005
+- id: gulati
+  container-title: Harvard Business Review
+  title: Get the Right Mix of Bricks and Clicks
+  author:
+  - family: Gulati
+    given: Ranjay
+  - family: Garino
+    given: Jason
+  type: article-journal
+  issued: 2000
+  volume: 78, no. 3
+  issue: May-June 2000
+  page: 107–114
+- id: timmers
+  container-title: Electronic Markets
+  title: Business Models for Electronic Markets
+  author:
+  - family: Timmers
+    given: Paul
+  type: article-journal
+  issued: 1998
+  volume: 8 (2)
+  page: 3-8
+- id: rappa
+  title: Business Models on the Web
+  author:
+  - family: Rappa
+    given: Michael
+  type: webpage
+  URL: http://digitalenterprise.org/models/models.html
+  issued: 2010
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 25
+- id: mccarthy
+  title: "Amazon's first New York bookstore blends tradition with technology"
+  author:
+  - family: McCarthy
+    given: Tom
+  type: webpage
+  URL: https://www.theguardian.com/technology/2017/may/26/amazon-new-york-bookstore
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 25
+- id: yip
+  title: "Basic Concepts of Co-Branding, With Examples from the Hospitality 
+  Industry Could Co-branding Improve Your Bottomline?"
+  author:
+  - family: Yip
+    given: Peggy
+  type: webpage
+  URL: http://www.hotel-online.com/News/PR2005_3rd/Sep05_CoBranding.html
+  issued: 2005
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 25
+...
