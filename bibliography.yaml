@@ -109,6 +109,22 @@ references:
   volume: 78, no. 3
   issue: May-June 2000
   page: 107–114
+- id: pine
+  container-title: Harvard Business Review
+  title: Making Mass Customization Work
+  author:
+  - family: Pine
+    given: B. Joseph
+    suffix: II
+  - family: Victor
+    given: Bart
+  - family: Boynton
+    given: Andrew C.
+  type: article-journal
+  issued: 1993
+  volume: 71, no. 5
+  issue: September-October 1993
+  page: 108–119
 - id: timmers
   container-title: Electronic Markets
   title: Business Models for Electronic Markets
@@ -159,4 +175,33 @@ references:
     - - 2017
       - 11
       - 25
+- id: tseng
+  container-title: 'Handbook of Industrial Engineering: Technology and Operations Management'
+  title: Mass Customization
+  editor:
+  - family: Salvendy
+    given: Gavriel
+  author:
+  - family: Tseng
+    given: Mitchell M.
+  - family: Jiao
+    given: Jianxin
+  type: chapter
+  publisher: John Wiley and Sons
+  publisher-place: New York, NY
+  edition: 3rd Edition
+  issued: 2001
+  page: 684-709
+- id: recipure
+  title: 'ReciPure: The Mix Factory of the Future'
+  author:
+  - literal: Zeppelin GmbH
+  type: webpage
+  URL: https://www.iso.org/standard/62021.html
+  issued: 2016
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 18
 ...

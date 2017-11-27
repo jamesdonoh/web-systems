@@ -1,14 +1,13 @@
-Other books to cite at random:
+Unused books to cite at random:
 - Chaffey, e-business and e-commerce management
   https://geomart25.files.wordpress.com/2014/05/dave-chaffey-e-business-and-e-commerce-management-strategies-4th-ed-qwerty80.pdf
 - Using BPMN for modelling manufacturing processes (VSM etc.)
   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.412.7554&rep=rep1&type=pdf
 - Business models on the web
   http://digitalenterprise.org/models/models.html
-
-Reading room requests:
+- Mass Customisation - Pine (cited in Papazoglou)
+  https://books.google.co.uk/books/about/Mass_Customization.html?id=2_3PMy4LQHkC
 - Web services&SOA : 2nd ed (Papazoglou)
-
 
 Stair Reynolds:
 
@@ -40,3 +39,9 @@ Papazoglou
 "There is no reason to do something oneself unless one is uniquely good at it." (goes on - bought externally) - p.55
 
 
+
+Tseng
+https://books.google.co.uk/books?id=sjY3IZ9Unv0C&pg=PA684#v=onepage&q&f=false
+http://www.ibrarian.net/navon/paper/3rd_Edition_Handbook_of_Industrial_Engineering_Ed.pdf?paperid=17403592
+
+"It is becoming increasingly important to develop production planning and control architectures that are modifiable, extensible, reconfigurable, adaptable, and fault tolerant"
