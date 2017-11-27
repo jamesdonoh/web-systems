@@ -67,6 +67,12 @@ Papazoglou and Rivers [-@papazoglou] suggest that, by making 'business rules' vi
 
 In order to employ a systems approach to modelling business, a necessary first step is to identify the system boundary. An analogous step is required in the Unified Process, where the requirements analyst must determine what is part of the system (i.e. inside the system boundary) and what is in its environment before use case modelling can begin [@arlow]. For the current study, the system boundary encompasses the _mymuesli_ online shop, the manufacturing process ...
 
+#### Outsourcing
+
+From a resource-based view of e-Business, a company's resources and competences are what lead to value creation and differentiate the company from its competitors. This implies that innovative companies should consider which functions are core to their business and which can be left to others, particularly where they are performed on too small a scale to be economical. For Papazoglou and Ribbers, "strategic outsourcing of all activities that are not core competencies potentially allows a company to focus on all those areas which add most value" [-@papazoglou].
+
+Obvious core competencies for _mymuesli_ are the sourcing and selection of appealing muesli ingredients, mixing and packaging the muesli, and coordinating website marketing. Non-core activities that are candidates for outsourcing include delivery of orders to customer addresses, accounting and human resources (HR), processing credit card transactions and supporting the servers that run the website. However, the choice is less clear-cut in some areas: is writing the website application code a core competency, or something that could be handled by a managed e-commerce platform such as [Shopify](https://www.shopify.co.uk/)?.
+
 #### Process management software
 
 (mention reasons for using it/integrating with it; idea of executable models; MDA?)
