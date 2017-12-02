@@ -204,4 +204,50 @@ references:
     - - 2017
       - 11
       - 18
+- id: forbes
+  title: A New Way To Outsource
+  author:
+  - literal: Forbes
+  type: webpage
+  URL: https://www.forbes.com/2010/06/01/vested-outsourcing-microsoft-intel-leadership-managing-kate-vitasek.html
+  issued: 2010
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 29
+- id: ibm
+  title: Customizing WebSphere Commerce
+  author:
+  - literal: IBM
+  type: webpage
+  URL: https://www.ibm.com/support/knowledgecenter/en/SSZLC2_8.0.0/com.ibm.commerce.developer.doc/concepts/cdestorecustomizer.htm
+  issued: 2010
+  accessed:
+    date-parts:
+    - - 2017
+      - 11
+      - 29
+- id: porter
+  container-title: Harvard Business Review
+  title: The Five Competitive Forces That Shape Strategy
+  author:
+  - family: Porter
+    given: Michael E.
+  type: article-journal
+  issued: 2008
+  volume: 86, no. 1
+  issue: January 2008
+  page: 25-40
+- id: hohpe
+  title: 'Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions'
+  author:
+  - family: Hohpe
+    given: Gregor
+  - family: Woolf
+    given: Woolf
+  type: book
+  publisher: Addison-Wesley
+  publisher-place: Boston, MA
+  issued: 2004
 ...

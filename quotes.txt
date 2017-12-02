@@ -8,6 +8,8 @@ Unused books to cite at random:
 - Mass Customisation - Pine (cited in Papazoglou)
   https://books.google.co.uk/books/about/Mass_Customization.html?id=2_3PMy4LQHkC
 - Web services&SOA : 2nd ed (Papazoglou)
+- Porter, Five Forces
+https://s3.amazonaws.com/academia.edu.documents/32580687/HBR_on_Strategy.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1511986382&Signature=GIQcN1Zxw%2FskD4iFkdpkuhMlyHE%3D&response-content-disposition=inline%3B%20filename%3DHBR_on_Strategy.pdf#page=25
 
 Stair Reynolds:
 

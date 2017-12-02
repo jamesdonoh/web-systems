@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="James Donohue - james.donohue@bbc.co.uk" />
+  <title>Web Systems - Assignment</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">Web Systems - Assignment</h1>
+<h2 class="author">James Donohue - <a href="mailto:james.donohue@bbc.co.uk">james.donohue@bbc.co.uk</a></h2>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#business-and-technological-context-1000-words">Business and technological context (~1000 words)</a><ul>
+<li><a href="#e-business-models">e-Business models</a></li>
+<li><a href="#role-of-information-systems">Role of information systems</a></li>
+<li><a href="#impact-of-web-technology">Impact of web technology</a></li>
+</ul></li>
+<li><a href="#solution-architecture-2750-words">Solution architecture (~2750 words)</a><ul>
+<li><a href="#business-processses">Business processses</a><ul>
+<li><a href="#modelling-processes-using-bpmn">Modelling processes using BPMN</a></li>
+<li><a href="#system-boundaries-and-outsourcing">System boundaries and outsourcing</a></li>
+<li><a href="#cloud-computing">Cloud computing</a></li>
+</ul></li>
+<li><a href="#impact-of-mass-customisation-on-production">Impact of mass customisation on production</a><ul>
+<li><a href="#tracking-systems">Tracking systems</a></li>
+</ul></li>
+<li><a href="#web-front-end">Web front-end</a><ul>
+<li><a href="#account-management">Account management</a></li>
+<li><a href="#device-and-platform-support">Device and platform support</a></li>
+</ul></li>
+<li><a href="#payment">Payment</a></li>
+<li><a href="#warehouse-and-purchasing">Warehouse and purchasing</a></li>
+<li><a href="#shipping">Shipping</a></li>
+<li><a href="#business-to-business-perspective-hotel-services">Business-to-business perspective: hotel services</a><ul>
+<li><a href="#approaches-to-rpc">Approaches to RPC</a></li>
+<li><a href="#semantics">Semantics</a></li>
+</ul></li>
+<li><a href="#other-cross-functional-concerns">Other cross-functional concerns</a><ul>
+<li><a href="#quality-control-process">Quality control process</a></li>
+<li><a href="#resilience-of-infrastructure">Resilience of infrastructure</a></li>
+<li><a href="#security">Security</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#detailed-technical-investigation-distributed-microservices-750-words">Detailed technical investigation: distributed microservices (~750 words)</a><ul>
+<li><a href="#evolution-of-web-services-and-service-oriented-architecture">Evolution of web services and service-oriented architecture</a></li>
+<li><a href="#challenges-of-distributed-systems">Challenges of distributed systems</a></li>
+<li><a href="#analysis-and-design-of-microservices">Analysis and design of microservices</a></li>
+</ul></li>
+<li><a href="#conclusion-500-words">Conclusion (~500 words)</a><ul>
+<li><a href="#applications-of-problem-to-bbc">Applications of problem to BBC</a></li>
+<li><a href="#suggestions-for-further-work">Suggestions for further work</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+<h1 id="business-and-technological-context-1000-words">Business and technological context (~1000 words)</h1>
+<p><em>mymuesli</em> is a German company founded in 2007 that sells custom-mixed muesli by post in four European countries. This paper uses <em>mymuesli</em> as a case study of how the Internet and information systems (IS) have the capacity to transform every part of the enterprise, and indeed to be integral to how it achieves its objectives.</p>
+<h2 id="e-business-models">e-Business models</h2>
+<p>Papazoglou and Ribbers <span class="citation">[-@papazoglou]</span> define an e-Business model as &quot;descriptive representation of the fundamental components of a business that operates partially or completely on the Internet&quot;. A detailed discussion of features common to all business models, not just ones for e-Business (such as value proposition and revenue model), is beyond the scope of this paper. However, using the authors' classification system for such models, we can see that <em>mymuesli</em> is an 'Internet-enabled' business and falls specifically within the business-to-consumer (B2C) category of 'e-Shop' proposed by <span class="citation">[@timmers]</span>.</p>
+<p>The company produces a 'niche' product which may have been prohibitively expensive to sell and distribute prior to the Internet. By operating as an e-Shop, <em>mymuesli</em> gains a &quot;low-cost route to global presence&quot; <span class="citation">[@timmers]</span>, meaning that company has the potential to be profitable selling its product direct to consumers around the world without the need for costly intermediaries. Another way of putting this is to say that the Internet allows manufacturers to &quot;compress the distribution channel&quot; <span class="citation">[-@rappa]</span>.</p>
+<p>On the other hand, although the Internet makes the physical distance between <em>mymuesli</em> and its customers less of a problem, it creates other kinds of challenges, such as increased competition and the relative ease with which a customer can abandon their 'shopping basket' and buy from a competitor instead. There is also an increased need to focus on online marketing and search engine optimisation (SEO) to ensure that customers find the product in the first place.</p>
+<p>It is notable that since 2012 <em>mymuesli</em> has also operated two physical stores in Germany <span class="citation">[@mymuesli]</span>, putting it in an unusual category, along with others such as Amazon <span class="citation">[@mccarthy]</span>, of a company that initially only operated online but later opened high street shops and raises the question (originally framed around traditional retailers embracing the web) of finding the right &quot;mix of bricks and clicks&quot; <span class="citation">[@gulati]</span>. One goal of this stategy is be to build customer awareness of the brand and provide more promotion opportunities.</p>
+<p>Furthermore, should <em>mymuesli</em> enter the hotel market its business model will also encompass business-to-business (B2B) interactions. The idea of allowing a hotel chain to offer a custom breakfast &quot;by mymuesli&quot; is an instance of 'co-branding', which not only exposes <em>mymuesli</em>'s offering to a wide range of potential customers but also &quot;enhances the credibility of the hotel’s brand by borrowing credibility from other brands&quot; <span class="citation">[@yip]</span>. Combined with an Application Programming Interface (API) for receiving and fulfilling hotel orders, this would represent a step towards a Value Web e-Business model based on inter-company-relationships that exploit the possibilities of new technology <span class="citation">[@papazoglou]</span>.</p>
+<h2 id="role-of-information-systems">Role of information systems</h2>
+<p>Information systems (IS) now have a major role in most businesses, but they are even more critical to businesses that conduct the majority of their activity online such as <em>mymuesli</em>. For Stair and Reynolds <span class="citation">[-@stair]</span> &quot;information is one of an organisation's most valuable resources&quot;, and a key function of an organisation's information systems is to collect and manipulate data and transform them into information which can provide value to the organisations' decision-makers.</p>
+<p>In the case of <em>mymuesli</em> data might include raw facts such as a customer postal address, stock levels for a particular muesli ingredient or an individual order number. By creating relationships between these data valuable information can be generated, such as the number of orders ready for shipping to a particular postcode, or an estimated date when stock will run out (based on historical orders). As well as allowing management to monitor the business effectively, this information can also be used as a basis for prediction. The use of computer-based information systems (CBIS) would therefore allow <em>mymuesli</em> to anticipate demand by ordering new stock automatically and leverage economies of scale by batching up orders for delivery to the same area. This 'feedback mechanism' within such systems is what allows the business to adapt to changing market conditions and &quot;is critical to helping organisations achieve their goals, such as increasing profits&quot; <span class="citation">[@stair]</span>.</p>
+<h2 id="impact-of-web-technology">Impact of web technology</h2>
+<p>(overview of web technologies; evolution of web to back-end/internal systems)</p>
+<h1 id="solution-architecture-2750-words">Solution architecture (~2750 words)</h1>
+<h2 id="business-processses">Business processses</h2>
+<h3 id="modelling-processes-using-bpmn">Modelling processes using BPMN</h3>
+<p>Business process modelling is a form of analysis that describes the dynamic activities performed by a business. One objective of creating a process model is to gain insights into how a business operates, which once validated can be used during the design phase of an information system to assist in the creation of further artefacts such as a data model <span class="citation">[@aalst]</span>. For example, when a customer is ready to place an order with <em>mymuesli</em>, the company must acquire the user's postal address in order to know where to dispatch the order to when ready, either by retrieving it from information system storage if the user has previously logged in or asking the user to provide it at checkout. This entails that any data/object model for the customer must include all required address information.</p>
+<div class="figure">
+<embed src="account.pdf" />
+<p class="caption">Business process for associating an address with an order in BPMN</p>
+</div>
+<p>There are a number of normative visual languages available for describing businesses processes. One example of these is Business Process Modelling Notation (BPMN), which uses defined symbols for events, tasks, flows and gateways to model business processes. Figure  shows such a BPMN diagram representing the process for a postal address being associated with an order. Although BPMN has some similarities with the UML activity diagrams familiar to many working in software development <span class="citation">[@uml]</span>, one aim of BPMN is to be intelligible by a wide range of business users and not just developers <span class="citation">[@papazoglou]</span>. On the other hand, one weakness of BPMN in contrast to earlier approaches such as 'classical' Petri nets is its lack of formal semantics in some areas, meaning that BPMN diagrams &quot;typically lack the precise mathematical basis that is required to render them really unambiguous&quot; <span class="citation">[@kossak]</span>. Even with this caveat, it remains a useful high-level tool for intra- and inter-business communication.</p>
+<h3 id="system-boundaries-and-outsourcing">System boundaries and outsourcing</h3>
+<p>Papazoglou and Rivers <span class="citation">[-@papazoglou]</span> suggest that, by making 'business rules' visible, business process models make it easier for companies to adapt in changing market conditions. This advantage is likely to be of particular relevance to retailers such as <em>mymuesli</em> that operate primarily in the rapidly-changing online environment.</p>
+<p>In order to employ a systems approach to modelling business, a necessary first step is to identify the system boundary. An analogous step is required in the Unified Process, where the requirements analyst must determine what is part of the system (i.e. inside the system boundary) and what is in its environment before use case modelling can begin <span class="citation">[@arlow]</span>. For the current study, the system boundary encompasses the <em>mymuesli</em> online shop, the manufacturing process ...</p>
+<p>From a resource-based view of e-Business, a company's resources and competences are what lead to value creation and differentiate the company from its competitors. This implies that innovative companies should consider which functions are core to their business and which can be left to others, particularly where they are performed on too small a scale to be economical. For Papazoglou and Ribbers, &quot;strategic outsourcing of all activities that are not core competencies potentially allows a company to focus on all those areas which add most value&quot; <span class="citation">[-@papazoglou]</span>.</p>
+<p>Obvious core competencies for <em>mymuesli</em> are the sourcing and selection of appealing muesli ingredients, mixing and packaging the muesli, and coordinating website marketing. Non-core activities that are candidates for outsourcing include delivery of orders to customer addresses, accounting and human resources (HR), processing credit card transactions and supporting the servers that run the website. However, the choice is less clear-cut in some areas: is writing the website application code a core competency, or something that could be handled by a managed e-commerce platform such as <a href="https://www.shopify.co.uk/">Shopify</a>?.</p>
+<h4 id="process-management-software">Process management software</h4>
+<p>(mention reasons for using it/integrating with it; idea of executable models; MDA?)</p>
+<h4 id="specifc-process-challenges-for-mymuesli">Specifc process challenges for mymuesli</h4>
+<p>(Seven wastes of lean: inventory; waiting) (https://en.wikipedia.org/wiki/Muda_(Japanese_term))</p>
+<h3 id="cloud-computing">Cloud computing</h3>
+<p>(different levels of outsourcing; IaaS vs SaaS; 'undifferentiated heavy lifting')</p>
+<h2 id="impact-of-mass-customisation-on-production">Impact of mass customisation on production</h2>
+<p>Although it also offers pre-configured 'off-the-shelf' muesli mixes, the ability to offer a customised muesli is integral to <em>mymuesli</em>'s value proposition, as indicated by the company's name. This reflects the trend towards mass customisation, the intent to &quot;provide products and services that best serve customer needs while maintaining near-mass production efficiency&quot; <span class="citation">[@tseng]</span>. Such an approach means that manufacturing and distribution processes must be designed with customisation in mind rather than as an afterthought. This is because, as Pine <span class="citation">[-@pine]</span> points out, one key requirement for business processes designed to support mass customisation is that they are <em>instantaneous</em>, meaning they can be linked together as quickly as possible. Therefore a design goal of the manufacturing process must be for it to rapidly assemble any combination of muesli ingredients for a given order in the correct quantities with the minimum of errors.</p>
+<p>One helpful step is is to reduce the number of possible combinations of ingredients. Although the <em>mymuesli</em> website 'mixer' shows 76 options, in fact all mixes must include one of the 14 standard muesli bases such as 'Five Grains'; this corresponds to the 'common base' within the product family architecture described by Tseng and Jiao <span class="citation">[-@tseng]</span>. These bases can be pre-filled into cartons (according to their projected popularity) prior to any actual order being received, leaving only 62 actual custom options and reducing the number of potential permutations significantly. Further time savings can be made by pre-mixing combinations of ingredients that are frequently ordered together.</p>
+<p>In order to minimise human error (and therefore waste) as far as possible, a fully automated mixing apparatus is envisaged that routes different ingredients from bulk containers and adds them to the carton for each order. The flow of material into the mixer is stopped when an electronic scale underneath the carton senses that the correct quantity has been added, with stock levels also being updated automatically. A number of cartons could be filled in quick succession by being placed on an automated guided vehicle (AGV) that moves under a series of suitably arranged storage bins; note this is the approach used by the ReciPure system <span class="citation">[@recipure]</span>.</p>
+<h3 id="tracking-systems">Tracking systems</h3>
+<p>Another important tool for automating the production process is barcodes, an example of machine-readable data input <span class="citation">[@stair]</span>. If <em>mymuesli</em> attaches a barcode containing a representation of the order number to each carton at the start of production, and scanned it repeatedly, the location of the carton and therefore the order's progress can be tracked with relative certainity.</p>
+<p>On the production line, by reading the barcode and looking up the order details, the mixing apparatus can know how much of each ingredient to dispense. Similarly, when orders are collected for distribution by courier, the barcode can be scanned to trigger the status of the order to automatically be updated to 'shipped'. In this way barcodes (including 2D variants such as QR Codes) assist with traceability of orders and reduce the scope for errors. Recording a timestamp along with each scan allows for analysis of how much time orders are taking prepare. A smartphone app offers a relatively simple and portable way of integrating barcode functionality into production processes: by using the phone's camera, staff can access or edit data about the order wherever they are.</p>
+<h2 id="web-front-end">Web front-end</h2>
+<p>(search, shopping basket, registration)</p>
+<h3 id="account-management">Account management</h3>
+<h3 id="device-and-platform-support">Device and platform support</h3>
+<h2 id="payment">Payment</h2>
+<h2 id="warehouse-and-purchasing">Warehouse and purchasing</h2>
+<h2 id="shipping">Shipping</h2>
+<h2 id="business-to-business-perspective-hotel-services">Business-to-business perspective: hotel services</h2>
+<h3 id="approaches-to-rpc">Approaches to RPC</h3>
+<p>(REST vs SOAP)</p>
+<h3 id="semantics">Semantics</h3>
+<p>(brief treatment of ontologies; semantic web)</p>
+<h2 id="other-cross-functional-concerns">Other cross-functional concerns</h2>
+<h3 id="quality-control-process">Quality control process</h3>
+<h3 id="resilience-of-infrastructure">Resilience of infrastructure</h3>
+<h3 id="security">Security</h3>
+<h1 id="detailed-technical-investigation-distributed-microservices-750-words">Detailed technical investigation: distributed microservices (~750 words)</h1>
+<h2 id="evolution-of-web-services-and-service-oriented-architecture">Evolution of web services and service-oriented architecture</h2>
+<h2 id="challenges-of-distributed-systems">Challenges of distributed systems</h2>
+<h2 id="analysis-and-design-of-microservices">Analysis and design of microservices</h2>
+<p>(Virtualisation and containerisation)</p>
+<h1 id="conclusion-500-words">Conclusion (~500 words)</h1>
+<h2 id="applications-of-problem-to-bbc">Applications of problem to BBC</h2>
+<h2 id="suggestions-for-further-work">Suggestions for further work</h2>
+<p>(create mobile app that uses API)</p>
+<h1 id="references">References</h1>
+</body>
+</html>
