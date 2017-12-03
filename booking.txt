@@ -1,0 +1,15 @@
+Bookings
+
+26 Oct - 03 Dec 17:59 - tx 17SYYASFIE - collection 592JN47F
+07 Nov - 03 Dec 15:18 - tx 17SP940U9E - collection 5CKFRW9F
+
+
+31 Oct - refund confirmed for booking 17SNV7RVZP
+
+13:45 from York to Leeds, arr 1408, 1421 from Leeds to WFK arr 1434
+14:23 from York to Leeds, arr 1447, 1505 from Leeds to WKF arr 1517
+
+Then:
+15:18 from WKF E40, qSqZ28t4tB
+arr 17:30
+

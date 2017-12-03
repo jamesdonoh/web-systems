@@ -70,9 +70,11 @@ Table: Summary of candidate functions for outsourcing \label{outsourcing}.
 
 #### RPC from SOAP to REST
 
-Remote Procedure Call (RPC) is "an interprocess communication (IPC) mechanism that enables data exchange and invocation of functionality residing in a different process" [@microsoft]. Such invocations are normally synchronous request-response interactions (meaning that the calling process 'blocks' until a response is received), and presented as if they were normal local procedure calls, thereby abstracting the details of communicating with the remote process from the developer; popular implementations include CORBA, Java's RMI and .NET remoting [@hohpe]. The first wave of web services adopted a similar approach, implementing RPC-style interactions on top of SOAP and HTTP. Unlike the implementations listed above, SOAP is an open standard and uses XML to encapsuate a method call and its response in a platform-independent way, with the goal of being both simple and extensible [@soap]. It is complemented by the Web Service Description Language (WSDL), which allows SOAP clients to discover where to find a web service and what operations it supports.
+Remote Procedure Call (RPC) is "an interprocess communication (IPC) mechanism that enables data exchange and invocation of functionality residing in a different process" [@microsoft]. Such invocations are normally synchronous request-response interactions (meaning that the calling process 'blocks' until a response is received), and presented as if they were normal local procedure calls, thereby abstracting the details of communicating with the remote process from the developer; popular implementations include CORBA, Java's RMI and .NET remoting [@hohpe]. The first wave of web services adopted a similar approach, implementing RPC-style interactions on top of SOAP and HTTP. Unlike the implementations listed above, SOAP is an open standard and uses XML to encapsuate a method call and its response in a platform-independent way, with the goal of being both simple and extensible [@soap]. It is complemented by technologies such as Web Service Description Language (WSDL) and Universal Description, Discovery, and Integration (UDDI), which allows SOAP clients to discover what services are available, where to find them and what operations they support.
 
-By contrast, REST grew in popularity in the early 2000s as a more lightweight and less verbose alternative to SOAP that leans more on the inherent statelessness and semantics of HTTP methods (e.g. `PUT`, `DELETE`) and a uniform interface based around URIs to provide web service capabilities. Another design goal of REST was to leverage the caching capabilities of HTTP to provide improved scalability for web services [@fielding]. Despite this, most RESTful web services are still implemented through the synchronous request-response paradigm of RPC. Moreover, as an 'architectural style' instead of a protocol, REST lacks features provided by SOAP such as built-in mappings of data types to byte sequences.
+By contrast, REST grew in popularity in the early 2000s as a more lightweight and less verbose alternative to SOAP that leans more on the inherent statelessness and semantics of HTTP methods (e.g. `PUT`, `DELETE`) and a uniform interface based around URIs to provide web service capabilities. Another design goal of REST was to leverage the caching capabilities of HTTP to provide improved scalability for web services [@fielding].
+
+Despite this, most RESTful web services are still implemented through the synchronous request-response paradigm of RPC. Moreover, as an 'architectural style' instead of a protocol, REST lacks features provided by SOAP such as built-in mappings of data types to byte sequences or standardised error handling. SOAP also benefits from considerable support in enterprise tooling and automation that is only now becoming available in REST.
 
 (relate to mymuesli?)
 
@@ -82,7 +84,7 @@ By contrast, REST grew in popularity in the early 2000s as a more lightweight an
 
 Service-Oriented Architecture (SOA) is an approach to designing systems where specific functions (such as managing customer details) purposely implemented as networked services that can be used by other applications, allowing a complex (and perhaps distributed) information system to be built in a more modular fashion out of interconnected parts that can be developed and modified independently [@stair].
 
-Depending on the area of functionality these services cover, a SOA may share some characteristics with a microservices architecture. In the approach made famous in the web sphere by companies like Netflix, microservices are usually RESTful rather than SOAP-based and highly granular, aiming to "do one thing very well" [@stair].
+Depending on the area of functionality these services cover, a SOA may share some characteristics with a microservices architecture. In the approach made famous in the web sphere by companies like Netflix, microservices are usually RESTful rather than SOAP-based and highly granular, aiming to "do one thing very well" [@stair]. Microservices generally aim for an organic 'bottom-up' approach rather than a 'top-down' model where all service interfaces are architected by a central team and and commonly use middleware such as enterprise service bus (ESB) as an integration point.
 
 One challenge with a microservices approach is creating a machine-readable description of services to allow for discovery and negotation by clients. Some authors consider the need for a service directory and a description of each service's interface to be central to SOA [@hohpe]. While SOAP and WSDL support these requirements in the enterprise SOA context, REST has no such built-in capabilities, and although equivalents for RESTful services (such as as Swagger, now known as the OpenAPI Specification) have emerged [@swagger] they are still relatively immature.
 
@@ -133,14 +135,34 @@ It is apparent that like most e-shops this company requires a web front-end whic
 
 This therefore requires either the creation of an bespoke web interface, or the use of an e-commerce platform designed with customised products in mind.
 
-There are several different approaches to consider.
+The following are some typical features that any web shop front-end would be expected to provide:
+
+Account management
+:   Allows customers to create an account, update their address, change their password, etc.
+
+Search
+:   Enables the discovery of products by allowing customers to search for a particular ingredient or mix by name
+
+Shopping basket
+:   Lets the customer temporarily store a mix before placing an order (e.g. while they add other mixes)
+
+Order tracking and management
+:   Allows the customer to check the status of their order and review previous orders
+
+E-mail notifications
+:   Sends e-mails to the customer once their order is received, shipped, etc.
+
+Support interface
+:   Allows users to send other questions associated with their account/order, as well as general feedback, and receive a timely response
+
+Since the above features, with some variations, are common to most online shops, _mymuesli_ could save duplicated development effort and therefore reduce costs by using existing implementations, either by licensing a commercial e-commerce system or an e-commerce Software as a Service (Saas) platform.
 
 #### COTS e-commerce systems
 
 Commercial-off-the-shelf (COTS) e-commerce platforms provide businesses with a range of ready-made e-commerce functionality that may combine a web storefront with an internal order management interface, often with a high level of flexiblility. For example, IBM WebSphere Commerce allows developers with the requisite knowledge of Java, JSP and XML to create custom user interface 'widgets' and back-end integrations [@ibm]. These platforms may also cater to 'omni-channel' models (including in-store and call centres as well as e-commerce), and can even communicate with legacy mainframe fulfilment or stock control systems via an Enterprise Service Bus (ESB). They are often (though not necessarily) installed on on-premises hardware to allow the necessary integrations to be implemented.
 
 
-On the other hand, some e-commerce platforms allow the creation of 'plugins', modules of reusable code which add functionality to the platform or change its behaviour.
+On the other hand, some e-commerce platforms allow the creation of 'plugins', modules of reusable code which add functionality to the platform or customise its behaviour, by means of a defined plugin interface (API) provided by the platform. This enables third-party developers to write and sell plugins that address recurring requirements not provided by the base platform, more mature platforms even provide an [app store](https://apps.shopify.com/) to make buying and installing these plugins easier and also providing another revenue stream for the vendor.
 
 The mixer interface needs to implement a number of business rules which are specific to _mymuesli_, for example:
 
@@ -163,7 +185,13 @@ In addition, the online shop includes very specific features which provide furth
 
 ## Shipping
 
-## Business-to-business perspective: hotel services
+## A business-to-business (B2B) perspective: hotel services
+
+One way that business strategists can maximise profits and ensure sustainability is by increasing product accessibility [@porter]. By providing breakfast services to hotels, _mymuesli_ could open a new channel to customers and raise awareness of its products, however this comes at a cost of the additional complexity of implementing the B2B interface, negotiating service level agreements (SLAs) etc. and also increased risks arising from the introduction of a third party (hotels) to muesli sales.
+
+### Hotel ordering and tracking API
+
+
 
 ### Approaches to RPC
 
@@ -175,7 +203,11 @@ In addition, the online shop includes very specific features which provide furth
 
 ## Other cross-functional concerns
 
-### Quality control process
+### Quality assurance 
+
+One key aspect of trading is ensuring the quality of the product and/or service being received by the customer, and e-commerce is no exception. Suitably-trained staff working in the _mymuesli_ production facility should be able to randomly sample mixes prior to shipping to ensure their contents and the carton label match the order details received via the website, with the information quickly displayed on a smartphone by scanning the barcode.  Any discrepancies or failure to meet the required standard can be logged by the system so that managment have visiblity of failure rates and can respond quickly in the event of a spike in problems.
+
+The same approach could be used to capture the number of complaints received by customers via the support interface and categorise them (e.g. delivery problems, quality issues, website errors) in order to priorities areas of the business process in need of improvement (the feedback mechanism described earlier).
 
 ### Resilience of infrastructure
 
@@ -195,7 +227,7 @@ In addition, the online shop includes very specific features which provide furth
 
 # Conclusion (~500 words)
 
-## Applications of problem to BBC
+## Applications of problem to [[]]
 
 ## Suggestions for further work
 
