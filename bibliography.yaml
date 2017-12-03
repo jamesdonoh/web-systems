@@ -1,7 +1,7 @@
 ---
 references:
 - id: papazoglou
-  title: 'e-Business: Organizational and technical Foundations'
+  title: 'e-Business: Organizational and Technical Foundations'
   author:
   - family: Papazoglou
     given: Michael P.
@@ -250,4 +250,63 @@ references:
   publisher: Addison-Wesley
   publisher-place: Boston, MA
   issued: 2004
+- id: microsoft
+  title: How RPC Works
+  author:
+  - literal: Microsoft
+  type: webpage
+  URL: https://technet.microsoft.com/en-us/library/cc738291(v=ws.10).aspx
+  issued: 2003
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: soap
+  title: 'SOAP Version 1.2 Part 1: Messaging Framework (Second Edition)'
+  author:
+  - literal: W3C
+  type: webpage
+  URL: https://www.w3.org/TR/soap12/
+  issued: 2007
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: swagger
+  title: 'OpenAPI Specification, Version 3.0.0'
+  author:
+  - literal: SmartBear
+  type: webpage
+  URL: https://swagger.io/specification/
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: fielding
+  title: 'Architectural Styles and the Design of Network-based Software Architectures'
+  author:
+  - family: Fielding
+    given: Roy
+  type: webpage
+  URL: http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm
+  issued: 2007
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: chaffey
+  title: 'E-Business and E-Commerce Management: Strategy, Implementation and Practice'
+  author:
+  - family: Chaffey
+    given: Dave
+  type: book
+  issued: 2009
+  publisher: Pearson
+  publisher-place: Harlow
+  edition: 4th Edition
 ...

@@ -68,11 +68,35 @@ IT                              E-mail, ...
 
 Table: Summary of candidate functions for outsourcing \label{outsourcing}.
 
+#### RPC from SOAP to REST
+
+Remote Procedure Call (RPC) is "an interprocess communication (IPC) mechanism that enables data exchange and invocation of functionality residing in a different process" [@microsoft]. Such invocations are normally synchronous request-response interactions (meaning that the calling process 'blocks' until a response is received), and presented as if they were normal local procedure calls, thereby abstracting the details of communicating with the remote process from the developer; popular implementations include CORBA, Java's RMI and .NET remoting [@hohpe]. The first wave of web services adopted a similar approach, implementing RPC-style interactions on top of SOAP and HTTP. Unlike the implementations listed above, SOAP is an open standard and uses XML to encapsuate a method call and its response in a platform-independent way, with the goal of being both simple and extensible [@soap]. It is complemented by the Web Service Description Language (WSDL), which allows SOAP clients to discover where to find a web service and what operations it supports.
+
+By contrast, REST grew in popularity in the early 2000s as a more lightweight and less verbose alternative to SOAP that leans more on the inherent statelessness and semantics of HTTP methods (e.g. `PUT`, `DELETE`) and a uniform interface based around URIs to provide web service capabilities. Another design goal of REST was to leverage the caching capabilities of HTTP to provide improved scalability for web services [@fielding]. Despite this, most RESTful web services are still implemented through the synchronous request-response paradigm of RPC. Moreover, as an 'architectural style' instead of a protocol, REST lacks features provided by SOAP such as built-in mappings of data types to byte sequences.
+
+(relate to mymuesli?)
+
+[@chaffey]?
+
+#### Service-oriented and microservices architectures
+
+Service-Oriented Architecture (SOA) is an approach to designing systems where specific functions (such as managing customer details) purposely implemented as networked services that can be used by other applications, allowing a complex (and perhaps distributed) information system to be built in a more modular fashion out of interconnected parts that can be developed and modified independently [@stair].
+
+Depending on the area of functionality these services cover, a SOA may share some characteristics with a microservices architecture. In the approach made famous in the web sphere by companies like Netflix, microservices are usually RESTful rather than SOAP-based and highly granular, aiming to "do one thing very well" [@stair].
+
+One challenge with a microservices approach is creating a machine-readable description of services to allow for discovery and negotation by clients. Some authors consider the need for a service directory and a description of each service's interface to be central to SOA [@hohpe]. While SOAP and WSDL support these requirements in the enterprise SOA context, REST has no such built-in capabilities, and although equivalents for RESTful services (such as as Swagger, now known as the OpenAPI Specification) have emerged [@swagger] they are still relatively immature.
+
 #### Heterogenous infrastructure
 
-According to Hohpe and Woolf [-@hohpe], "creating a single, big application to run a complete business is next to impossible", despite the efforts of some Enterprise Resource Planning (ERP) vendors such as SAP. This means that it is unrealistic to expect an existing commercial off-the-shelf (COTS) system to implement all of a business' needs, or to write such a system from scratch. Using multiple different applications has the benefit of allowing businesses to use a 'best of breed' approach in selecting the right software for each function. However, where companies have such pre-existing IT infrastructure the need for integration between systems arises. Enterprise Application Integration (EAI) suites attempt to solve this problem through features such as messaging and workflow management [@hohpe].
+According to Hohpe and Woolf [-@hohpe], "creating a single, big application to run a complete business is next to impossible", despite the efforts of some Enterprise Resource Planning (ERP) vendors such as SAP. This means that it is unrealistic to expect an existing commercial off-the-shelf (COTS) system to implement all of a business' needs, or to write such a system from scratch. Using multiple different applications has the benefit of allowing businesses to use a 'best of breed' approach in selecting the right software for each function. However, where companies have such pre-existing IT infrastructure the need for integration between systems arises. Enterprise Application Integration (EAI) attempts to solve this problem through middleware providing features such as messaging and workflow management [@hohpe].
 
-For the purpose of this study we can imagine _mymuesli_ as a 'green field' project without any 'legacy' IT infrastructure. However it is possible that the company would still choose to buy some existing off-the-shelf software to provide certain functions, such as accounting. In this scenario the company might consider using an EAI suite to assist with integrating this software with other systems.
+For the purpose of this study we can imagine _mymuesli_ as a 'green field' project without any 'legacy' IT infrastructure. However it is possible that the company would still choose to buy some existing off-the-shelf software to provide certain functions, such as accounting, and may aquire diverse information systems as a result of acquisitions or mergers [@stair]. In this scenario the company might consider implementing an EAI suite to facilitate the integration of these systems.
+
+#### Beyond RPC: Loose coupling and message-oriented middleware
+
+One important aspect of designing information systems is the need to accept that change is inevitable, whether to business requirements or within the systems that provide different business functions, even as part of normal maintenance. For example, upgrading a stock control system to the latest version could break interoperability with a linked accounting system. Moreover, faults occur and distributed systems may become unavailable for periods of time. Although some Remote Procedure Call (RPC) implementations allow synchronous remote requests to be made by simply calling a method, for Hohpe and Woolf [-@hohpe] the idea of abstracting RPC using the semantics of a local method call is 'asking for trouble' due to the increased unpredictability involved.
+
+Loose coupling is the name given to the design goal of reducing number of assumptions that systems make about each other in order to increase tolerance to change and failure. Loose coupling (also a design goal of SOA) advocates using platform-independent, self-describing data formats and (in an EAI context) eliminating the temporal dependency by rethinking remote calls into self-contained asynchronous messages that are sent to a logical 'channel', an approach usually implemented through message-oriented middleware, or MOM. Such systems may also offer the ability to translate between message formats and route messages to different places depending on their contents, along with a system management and monitoring functions [@hohpe]. Despite increased flexiblity, the downside of these approaches is that they can be more complex to design, implement and debug.
 
 #### Process management software
 
@@ -160,6 +184,8 @@ In addition, the online shop includes very specific features which provide furth
 # Detailed technical investigation: distributed microservices (~750 words)
 
 ## Evolution of web services and service-oriented architecture
+
+(SOA?)
 
 ## Challenges of distributed systems
 
