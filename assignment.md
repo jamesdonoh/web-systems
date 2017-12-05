@@ -31,6 +31,19 @@ In the case of _mymuesli_ data might include raw facts such as a customer postal
 
 # Solution architecture (~2750 words)
 
+Figure \ref{business-functions} gives a high-level breakdown of regular business functions needed by _mymuesli_. Note that some functions that might only be performed occasionally are omitted (for example, legal advice). Also note that functions like IS 'cut across' other areas, providing services to the whole business, whereas others are more self-contained (e.g. Purchasing). Nor does this figure directly imply a human resource (HR) structure - in a 'start-up' context multiple functions might be performed by the same person.
+
+![Breakdown of _mymuesli_ business functions\label{business-functions}](business-functions.pdf)
+
+We can further analyse the day-to-day operation of the business by identifying some of the most important business processes and modelling them using BPMN. Figure \ref{order-fulfilment} outlines the process involved in preparing a customer order for shipping once received via the website. This process is a good candidate for initial study because it is fundamental to _mymuesli_'s value chain - without it there is no product to sell. Interactions with third-party web services are identified as 'service' tasks using the gear icon.
+
+![Process for order fulfilment described using BPMN\label{order-fulfilment}](order-fulfilment.pdf)
+
+The process given here assumes a just-in-time (JIT) approach to managing inventory where ingredient stock is ordered only as it is needed, reducing the costs and waste associated with holiding excess inventory. This is based on the assumption that _mymuesli_ has reliable suppliers and steady production [@economist]. One limitation of Figure \ref{order-fulfilment} is therefore that it does not show how to handle a situation where stock delivery is delayed or there is a production backlog, which would lead to the shipment needing to be cancelled.
+
+
+## API to support web front-end and mobile applications
+
 ## Business processses
 
 ### Modelling processes using BPMN
@@ -53,11 +66,23 @@ This suggests that _mymuesli_ should guard against increasing supplier power fur
 
 From a resource-based view of e-Business, a company's resources and competences are what lead to value creation and differentiate the company from its competitors. This implies that innovative companies should consider which functions are core to their business and which can be left to others, particularly where they are performed on too small a scale to be economical. For Papazoglou and Ribbers, "strategic outsourcing of all activities that are not core competencies potentially allows a company to focus on all those areas which add most value" [-@papazoglou]. This echoes Peter Drucker's famous maxim of "do what you do best and outsource the rest" [@forbes].
 
-Obvious core competencies for _mymuesli_ are the sourcing and selection of appealing muesli ingredients, mixing and packaging the muesli, and deciding how and where to market the website. Non-core activities that are candidates for outsourcing include delivery of orders to customer addresses, accounting and human resources (HR), copywriting, graphic design, processing credit card transactions and supporting the servers that run the website. However, the choice is less clear-cut in some areas: is writing the website application code a core competency, or something that could be handled by a managed e-commerce platform such as [Shopify](https://www.shopify.co.uk/)?. Some of this is summarised in Table \ref{outsourcing}.
+Obvious core competencies for _mymuesli_ are the sourcing and selection of appealing muesli ingredients, mixing and packaging the muesli, and deciding how and where to market the website. Non-core activities that are candidates for outsourcing include delivery of orders to customer addresses, accounting and human resources (HR), copywriting, graphic design, processing credit card transactions and supporting the servers that run the website. However, the choice is less clear-cut in some areas: is writing the website application code a core competency, or something that could be handled by a managed e-commerce platform such as [Shopify](https://www.shopify.co.uk/)?.
 
-------------------------------------------------------------------------------------------
-Function                        Example activities                                      
-------------------------------  ----------------------------------------------------------
+Some of this is summarised in Table \ref{functions}.
+
+-----------------------------------------------------------------------------------------------------
+Functional area                 Example activities and capabilities                             
+------------------------------  ---------------------------------------------------------------------
+Purchasing                      Managing relationships with suppliers of ingredients, packaging, etc.
+
+                                Negotiating best possible prices
+
+                                Placing orders at the correct time to avoid being 'out of stock'
+
+Warehouse                       Ensuring ingredients are properly stored
+
+                                Maintaining ingredient stock inventory
+
 Accounting                      Corporate tax return, VAT, payroll                     
 
 Human resources                 ?
@@ -66,17 +91,18 @@ IT                              E-mail, ...
 
 ------------------------------------------------------------------------------------------
 
-Table: Summary of candidate functions for outsourcing \label{outsourcing}.
+Table: Main functional areas and activities for _mymuesli_ \label{functions}.
 
 #### RPC from SOAP to REST
 
-Remote Procedure Call (RPC) is "an interprocess communication (IPC) mechanism that enables data exchange and invocation of functionality residing in a different process" [@microsoft]. Such invocations are normally synchronous request-response interactions (meaning that the calling process 'blocks' until a response is received), and presented as if they were normal local procedure calls, thereby abstracting the details of communicating with the remote process from the developer; popular implementations include CORBA, Java's RMI and .NET remoting [@hohpe]. The first wave of web services adopted a similar approach, implementing RPC-style interactions on top of SOAP and HTTP. Unlike the implementations listed above, SOAP is an open standard and uses XML to encapsuate a method call and its response in a platform-independent way, with the goal of being both simple and extensible [@soap]. It is complemented by technologies such as Web Service Description Language (WSDL) and Universal Description, Discovery, and Integration (UDDI), which allows SOAP clients to discover what services are available, where to find them and what operations they support.
+Remote Procedure Call (RPC) is "an interprocess communication (IPC) mechanism that enables data exchange and invocation of functionality residing in a different process" [@microsoft]. Such invocations are normally synchronous request-response interactions (meaning that the calling process 'blocks' until a response is received), and presented as if they were normal local procedure calls, thereby abstracting the details of communicating with the remote process from the developer; popular implementations include CORBA, Java's RMI and .NET remoting [@hohpe]. The first wave of web services adopted a similar approach, implementing RPC-style interactions on top of SOAP (and normally HTTP, although SMTP and JMS bindings for SOAP are possible). Unlike the implementations listed above, SOAP is an open standard and uses XML to encapsuate a method call and its response in a platform-independent way, with the goal of being both simple and extensible [@soap]. It is complemented by technologies such as Web Service Description Language (WSDL) and Universal Description, Discovery, and Integration (UDDI), which allows SOAP clients to discover what services are available, where to find them and what operations they support - providing an explicit 'contract' of behaviour for clients to code against.
 
 By contrast, REST grew in popularity in the early 2000s as a more lightweight and less verbose alternative to SOAP that leans more on the inherent statelessness and semantics of HTTP methods (e.g. `PUT`, `DELETE`) and a uniform interface based around URIs to provide web service capabilities. Another design goal of REST was to leverage the caching capabilities of HTTP to provide improved scalability for web services [@fielding].
 
 Despite this, most RESTful web services are still implemented through the synchronous request-response paradigm of RPC. Moreover, as an 'architectural style' instead of a protocol, REST lacks features provided by SOAP such as built-in mappings of data types to byte sequences or standardised error handling. SOAP also benefits from considerable support in enterprise tooling and automation that is only now becoming available in REST.
 
-(relate to mymuesli?)
+For the _mymuesli_ case we can assume that point-to-point HTTP communication between endpoints is practical so SOAP's support for alternate transports is not vital, and as the different services will be developed by the same team the benefit of rigid WSDL-style specification is reduced.
+
 
 [@chaffey]?
 
@@ -86,7 +112,7 @@ Service-Oriented Architecture (SOA) is an approach to designing systems where sp
 
 Depending on the area of functionality these services cover, a SOA may share some characteristics with a microservices architecture. In the approach made famous in the web sphere by companies like Netflix, microservices are usually RESTful rather than SOAP-based and highly granular, aiming to "do one thing very well" [@stair]. Microservices generally aim for an organic 'bottom-up' approach rather than a 'top-down' model where all service interfaces are architected by a central team and and commonly use middleware such as enterprise service bus (ESB) as an integration point.
 
-One challenge with a microservices approach is creating a machine-readable description of services to allow for discovery and negotation by clients. Some authors consider the need for a service directory and a description of each service's interface to be central to SOA [@hohpe]. While SOAP and WSDL support these requirements in the enterprise SOA context, REST has no such built-in capabilities, and although equivalents for RESTful services (such as as Swagger, now known as the OpenAPI Specification) have emerged [@swagger] they are still relatively immature.
+One challenge with a microservices approach is creating a machine-readable description of services to allow for discovery and negotation by clients. Some authors consider the need for a service directory and a description of each service's interface to be central to SOA [@hohpe]. While SOAP and WSDL support these requirements in the enterprise SOA context, REST has no such built-in capabilities, and although equivalents for RESTful services (such as as WADL and Swagger, now known as the OpenAPI Specification) have emerged [@swagger] they still do not have the same level of support.
 
 #### Heterogenous infrastructure
 
@@ -157,6 +183,10 @@ Support interface
 
 Since the above features, with some variations, are common to most online shops, _mymuesli_ could save duplicated development effort and therefore reduce costs by using existing implementations, either by licensing a commercial e-commerce system or an e-commerce Software as a Service (Saas) platform.
 
+### Multi-platform strategy
+
+(Mentioned in ILOs - must write this)
+
 #### COTS e-commerce systems
 
 Commercial-off-the-shelf (COTS) e-commerce platforms provide businesses with a range of ready-made e-commerce functionality that may combine a web storefront with an internal order management interface, often with a high level of flexiblility. For example, IBM WebSphere Commerce allows developers with the requisite knowledge of Java, JSP and XML to create custom user interface 'widgets' and back-end integrations [@ibm]. These platforms may also cater to 'omni-channel' models (including in-store and call centres as well as e-commerce), and can even communicate with legacy mainframe fulfilment or stock control systems via an Enterprise Service Bus (ESB). They are often (though not necessarily) installed on on-premises hardware to allow the necessary integrations to be implemented.
@@ -213,6 +243,8 @@ The same approach could be used to capture the number of complaints received by 
 
 ### Security
 
+(Mentioned in ILOs! Must write this)
+
 # Detailed technical investigation: distributed microservices (~750 words)
 
 ## Evolution of web services and service-oriented architecture
@@ -227,10 +259,24 @@ The same approach could be used to capture the number of complaints received by 
 
 # Conclusion (~500 words)
 
-## Applications of problem to [[]]
+## Relevance of study to the British Broadcasting Corporation (BBC)
+
+On the surface _mymuesli_ and the BBC are very different entities. Instead of a physical product, the BBC's products are in the form of services (e.g. Radio 2, iPlayer, the BBC Sport website) and instead of directly charging customers for the services they use a statutory per-household licence fee is charged for owning a television. Nonetheless the BBC could adopt several aspects of this study's approach, for example:
+
+- using BPMN to describe the steps in the business process that occurs when a journalist publishes a news story on the BBC website, in order to make the process visible to management
+
+- with analysis of the streaming TV industry (including recent entrants such as Netflix and Amazon) to position itself where Porter's 'five forces' are weakest to ensure its long-term survival
+
+- break down its legacy monolithic information systems into small self-contained microservices with their own release schedule in order to increase rate of development and tolerance to change
+
+- provide an API to allow third parties such as other broadcasters to submit requests for content from the BBC archive to be transcoded to required formats and delivered by file upload or on physical media
+
+Moreover, the BBC could adopt a strategic approach to its information systems, outsourcing functions as needed in order to focus on its core competencies.
+
 
 ## Suggestions for further work
 
 (create mobile app that uses API)
+(R&D function)
 
 # References

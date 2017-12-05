@@ -1,6 +1,6 @@
 default: assignment.pdf
 
-diagrams = account.pdf
+diagrams = account.pdf business-functions.pdf order-fulfilment.pdf
 
 assignment.pdf: assignment.md bibliography.yaml $(diagrams)
 	pandoc --filter pandoc-citeproc \

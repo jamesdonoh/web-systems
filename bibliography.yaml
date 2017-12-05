@@ -309,4 +309,28 @@ references:
   publisher: Pearson
   publisher-place: Harlow
   edition: 4th Edition
+- id: economist
+  title: Just-in-time
+  author:
+  - literal: The Economist
+  type: webpage
+  URL: http://www.economist.com/node/13976392
+  issued: 2009
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: bbc
+  title: 'Inside the BBC: The Licence Fee'
+  author:
+  - literal: BBC
+  type: webpage
+  URL: http://www.bbc.co.uk/corporate2/insidethebbc/whoweare/licencefee
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
 ...
