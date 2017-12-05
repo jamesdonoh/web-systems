@@ -41,8 +41,21 @@ We can further analyse the day-to-day operation of the business by identifying s
 
 The process given here assumes a just-in-time (JIT) approach to managing inventory where ingredient stock is ordered only as it is needed, reducing the costs and waste associated with holiding excess inventory. This is based on the assumption that _mymuesli_ has reliable suppliers and steady production [@economist]. One limitation of Figure \ref{order-fulfilment} is therefore that it does not show how to handle a situation where stock delivery is delayed or there is a production backlog, which would lead to the shipment needing to be cancelled.
 
+## Microservices architecture
 
-## API to support web front-end and mobile applications
+In order to anticipate the need for scaling and give _mymuesli_ the greatest flexibility as it grows, we suggest an architecture based around discrete microservices which can be developed and deployed independently [@microservices]. At the price of increasing the overall complexity of the solution, this enables various combinations of current and future requirements (B2C, B2B, etc.) to be fulfilled by composing together different services.
+
+Once a system boundary is determined, business process descriptions like the ones above and user stories can be used to help identify the services that may be needed. Although this can be done by business area, another common approach is by entity, by looking for the nouns used in user stories, for example:
+
+- Orders
+- Inventory
+- Customers
+
+Figure \ref{service-architecture} shows how such services could then be used by a range of front-end interfaces to satisfy different user stories  The boxes in light grey represent APIs provided by third parties, such as a postal delivery broker service.
+
+As with most tiered approaches to architecture, the main benefit of implementing business logic in APIs (rather than embedding it in the website code) is that it facilitates reuse: the figure shows how a native mobile app could easily be developed using the same APIs as the website.
+
+![Microservices architecture for _mymuesli_ showing different front-ends\label{service-architecture}](service-architecture.pdf)
 
 ## Business processses
 
@@ -257,8 +270,6 @@ The same approach could be used to capture the number of complaints received by 
 
 (Virtualisation and containerisation)
 
-# Conclusion (~500 words)
-
 ## Relevance of study to the British Broadcasting Corporation (BBC)
 
 On the surface _mymuesli_ and the BBC are very different entities. Instead of a physical product, the BBC's products are in the form of services (e.g. Radio 2, iPlayer, the BBC Sport website) and instead of directly charging customers for the services they use a statutory per-household licence fee is charged for owning a television. Nonetheless the BBC could adopt several aspects of this study's approach, for example:
@@ -273,10 +284,10 @@ On the surface _mymuesli_ and the BBC are very different entities. Instead of a 
 
 Moreover, the BBC could adopt a strategic approach to its information systems, outsourcing functions as needed in order to focus on its core competencies.
 
+# Conclusion
 
-## Suggestions for further work
+_mymuesli_ is a worthwhile example to study in the context of web information systems, partly because its business model is founded upon on web technology but also because it demonstrates how startups without significant investment in legacy enterprise systems have the freedom to adopt an innovative information systems strategy. The internet has enabled the development of new business models (such as SaaS) and accelerated the move towards outsourcing of non-core functions, while the explosion of pay-as-you-go cloud-based hosting has democratised access to infrastructure that was previously only available to large corporations.
 
-(create mobile app that uses API)
-(R&D function)
+The emergence of microservice architectures is particularly significant in this context. Although it is less of a revolutionary concept than an evolution of existing patterns - some see its roots in the Unix philosophy [@microservices] - along with the RESTful style it continues to challenge a lot of the traditional assumptions about how business information systems are developed and integrated. This can be seen clearly from its adoption within the BBC's own systems.
 
 # References

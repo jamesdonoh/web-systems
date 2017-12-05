@@ -333,4 +333,19 @@ references:
     - - 2017
       - 12
       - 02
+- id: microservices
+  title: 'Microservices: a definition of this new architectural term'
+  author:
+  - family: Fowler
+    given: Martin
+  - family: Lewis
+    given: James
+  type: webpage
+  URL: https://martinfowler.com/articles/microservices.html
+  issued: 2014
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
 ...
