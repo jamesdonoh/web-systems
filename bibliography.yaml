@@ -348,4 +348,52 @@ references:
     - - 2017
       - 12
       - 02
+- id: businsider
+  title: Mobile sales drive unexpected UK e-commerce growth
+  author:
+  - literal: Business Insider
+  type: webpage
+  URL: http://uk.businessinsider.com/mobile-sales-drive-unexpected-uk-e-commerce-growth-2017-1
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: http
+  title: 'Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing'
+  author:
+  - literal: IETF
+  type: webpage
+  URL: https://tools.ietf.org/html/rfc7230
+  issued: 2014
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: css
+  title: Media Queries
+  author:
+  - literal: W3C
+  type: webpage
+  URL: https://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/
+  issued: 2012
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
+- id: pci
+  title: PCI Security Standards
+  author:
+  - literal: PCI
+  type: webpage
+  URL: https://www.pcisecuritystandards.org/
+  issued: 2017
+  accessed:
+    date-parts:
+    - - 2017
+      - 12
+      - 02
 ...

@@ -3,7 +3,7 @@ title: Web Systems - Assignment
 author: James Donohue - <james.donohue@bbc.co.uk>
 ---
 
-# Business and technological context (~1000 words)
+# Business and technological context
 
 _mymuesli_ is a German company founded in 2007 that sells custom-mixed muesli by post in four European countries. This paper uses _mymuesli_ as a case study of how the Internet and information systems (IS) have the capacity to transform every part of the enterprise, and indeed to be integral to how it achieves its objectives.
 
@@ -25,11 +25,7 @@ Information systems (IS) now have a major role in most businesses, but they are 
 
 In the case of _mymuesli_ data might include raw facts such as a customer postal address, stock levels for a particular muesli ingredient or an individual order number. By creating relationships between these data valuable information can be generated, such as the number of orders ready for shipping to a particular postcode, or an estimated date when stock will run out (based on historical orders). As well as allowing management to monitor the business effectively, this information can also be used as a basis for prediction. The use of computer-based information systems (CBIS) would therefore allow _mymuesli_ to anticipate demand by ordering new stock automatically and leverage economies of scale by batching up orders for delivery to the same area. This 'feedback mechanism' within such systems is what allows the business to adapt to changing market conditions and "is critical to helping organisations achieve their goals, such as increasing profits" [@stair].
 
-## Impact of web technology
-
-(overview of web technologies; evolution of web to back-end/internal systems)
-
-# Solution architecture (~2750 words)
+# Solution architecture
 
 Figure \ref{business-functions} gives a high-level breakdown of regular business functions needed by _mymuesli_. Note that some functions that might only be performed occasionally are omitted (for example, legal advice). Also note that functions like IS 'cut across' other areas, providing services to the whole business, whereas others are more self-contained (e.g. Purchasing). Nor does this figure directly imply a human resource (HR) structure - in a 'start-up' context multiple functions might be performed by the same person.
 
@@ -41,7 +37,7 @@ We can further analyse the day-to-day operation of the business by identifying s
 
 The process given here assumes a just-in-time (JIT) approach to managing inventory where ingredient stock is ordered only as it is needed, reducing the costs and waste associated with holiding excess inventory. This is based on the assumption that _mymuesli_ has reliable suppliers and steady production [@economist]. One limitation of Figure \ref{order-fulfilment} is therefore that it does not show how to handle a situation where stock delivery is delayed or there is a production backlog, which would lead to the shipment needing to be cancelled.
 
-## Microservices architecture
+## Microservices
 
 In order to anticipate the need for scaling and give _mymuesli_ the greatest flexibility as it grows, we suggest an architecture based around discrete microservices which can be developed and deployed independently [@microservices]. At the price of increasing the overall complexity of the solution, this enables various combinations of current and future requirements (B2C, B2B, etc.) to be fulfilled by composing together different services.
 
@@ -56,6 +52,8 @@ Figure \ref{service-architecture} shows how such services could then be used by 
 As with most tiered approaches to architecture, the main benefit of implementing business logic in APIs (rather than embedding it in the website code) is that it facilitates reuse: the figure shows how a native mobile app could easily be developed using the same APIs as the website.
 
 ![Microservices architecture for _mymuesli_ showing different front-ends\label{service-architecture}](service-architecture.pdf)
+
+# Discussion
 
 ## Business processses
 
@@ -98,9 +96,9 @@ Warehouse                       Ensuring ingredients are properly stored
 
 Accounting                      Corporate tax return, VAT, payroll                     
 
-Human resources                 ?
+Human resources                 Performance management, case work, salary and grading
 
-IT                              E-mail, ...
+IT                              E-mail, anti-virus, web access
 
 ------------------------------------------------------------------------------------------
 
@@ -115,9 +113,6 @@ By contrast, REST grew in popularity in the early 2000s as a more lightweight an
 Despite this, most RESTful web services are still implemented through the synchronous request-response paradigm of RPC. Moreover, as an 'architectural style' instead of a protocol, REST lacks features provided by SOAP such as built-in mappings of data types to byte sequences or standardised error handling. SOAP also benefits from considerable support in enterprise tooling and automation that is only now becoming available in REST.
 
 For the _mymuesli_ case we can assume that point-to-point HTTP communication between endpoints is practical so SOAP's support for alternate transports is not vital, and as the different services will be developed by the same team the benefit of rigid WSDL-style specification is reduced.
-
-
-[@chaffey]?
 
 #### Service-oriented and microservices architectures
 
@@ -138,21 +133,6 @@ For the purpose of this study we can imagine _mymuesli_ as a 'green field' proje
 One important aspect of designing information systems is the need to accept that change is inevitable, whether to business requirements or within the systems that provide different business functions, even as part of normal maintenance. For example, upgrading a stock control system to the latest version could break interoperability with a linked accounting system. Moreover, faults occur and distributed systems may become unavailable for periods of time. Although some Remote Procedure Call (RPC) implementations allow synchronous remote requests to be made by simply calling a method, for Hohpe and Woolf [-@hohpe] the idea of abstracting RPC using the semantics of a local method call is 'asking for trouble' due to the increased unpredictability involved.
 
 Loose coupling is the name given to the design goal of reducing number of assumptions that systems make about each other in order to increase tolerance to change and failure. Loose coupling (also a design goal of SOA) advocates using platform-independent, self-describing data formats and (in an EAI context) eliminating the temporal dependency by rethinking remote calls into self-contained asynchronous messages that are sent to a logical 'channel', an approach usually implemented through message-oriented middleware, or MOM. Such systems may also offer the ability to translate between message formats and route messages to different places depending on their contents, along with a system management and monitoring functions [@hohpe]. Despite increased flexiblity, the downside of these approaches is that they can be more complex to design, implement and debug.
-
-#### Process management software
-
-(mention reasons for using it/integrating with it; idea of executable models; MDA?)
-
-(Tom: jBPM - engine, JBoss BPM suite - develop and deploy)
-
-#### Specifc process challenges for mymuesli
-
-(Seven wastes of lean: inventory; waiting)
-(https://en.wikipedia.org/wiki/Muda_(Japanese_term))
-
-### Cloud computing
-
-(different levels of outsourcing; IaaS vs SaaS; 'undifferentiated heavy lifting')
 
 ## Impact of mass customisation on production
 
@@ -198,7 +178,9 @@ Since the above features, with some variations, are common to most online shops,
 
 ### Multi-platform strategy
 
-(Mentioned in ILOs - must write this)
+In order to reach the widest possible market, _mymuesli_ should deliver e-commerce interfaces that work well for mobile web users as well as desktop browsers. This is because mobile ('m-commerce') is expected to account for 45% of online sales by 2020, with users spending most of their time in mobile browsers instead of apps [@businsider]. This means that any e-commerce business needs to have a strategy for ensuring their site is compatible with the widest range of web-enabled devices.
+
+One thing that makes the web an unusual platform for application development is the relative lack of control that developers have over the user experience. At the application layer client-server interactions over HTTP are well defined [@http], and the basic hypertext model of HTML is widely understood, but the wide variance in client feature support and web browser vendor-specific 'quirks' have made it historically a challenging environment. With the increase in mobile browser usage, web designers are creating 'mobile-first' designs that must also work well on desktop, while the engineering focus has moved away from creaing specific mobile versions to a single 'responsive' website that embraces the variation in web-enabled devices, typically using media queries [@css] to allow suitable stylesheets to be presented to different users. Furthermore, since for mobile users temporary loss of network connection is a regular event, _mymuesli_ needs to ensure that its m-commerce interface recovers gracefully from such errors in order to avoid losing sales.
 
 #### COTS e-commerce systems
 
@@ -215,34 +197,9 @@ The mixer interface needs to implement a number of business rules which are spec
 
 In addition, the online shop includes very specific features which provide further feedback to the user as they customise their museli, improving the overall user experience, such as a chart of nutritional information, a list of raw ingredients and other visual hints indicating the flavour profile and other characteristics of the mix (e.g. 'high fibre'). All of this points towards the need for the development of a bespoke interface.
 
-
-(search, shopping basket, registration)
-
-### Account management
-
-### Device and platform support
-
-## Payment
-
-## Warehouse and purchasing
-
-## Shipping
-
 ## A business-to-business (B2B) perspective: hotel services
 
 One way that business strategists can maximise profits and ensure sustainability is by increasing product accessibility [@porter]. By providing breakfast services to hotels, _mymuesli_ could open a new channel to customers and raise awareness of its products, however this comes at a cost of the additional complexity of implementing the B2B interface, negotiating service level agreements (SLAs) etc. and also increased risks arising from the introduction of a third party (hotels) to muesli sales.
-
-### Hotel ordering and tracking API
-
-
-
-### Approaches to RPC
-
-(REST vs SOAP)
-
-### Semantics
-
-(brief treatment of ontologies; semantic web)
 
 ## Other cross-functional concerns
 
@@ -252,23 +209,17 @@ One key aspect of trading is ensuring the quality of the product and/or service 
 
 The same approach could be used to capture the number of complaints received by customers via the support interface and categorise them (e.g. delivery problems, quality issues, website errors) in order to priorities areas of the business process in need of improvement (the feedback mechanism described earlier).
 
-### Resilience of infrastructure
+### Security implications
 
-### Security
+It is essential for the integrity any e-Business that security is built into any technology solution from an early stage (following 'security by design' development principles). Although the need for information security measures around hardware and other infrastructure (in terms of tools such as firewalls and intrustion detection systems) is well known, the need for good application-level security is also critical. _mymuesli_'s website (and any publicly-accessible web services) should be built on the principle of least privilege, meaning that each component or agent within a system is granted the lowest level of permission necessary to carry out its function.
 
-(Mentioned in ILOs! Must write this)
+In the context of the web, any e-commerce site is potentially a target for would-be attackers wanting to intercept credit card information or access confidential customer data. Standards such as the Payment Card Industry Data Security Standard [@pci] exist to ensure that sites using credit card data take necessary security measures and thereby help and create a safe environment (based on enforcing correct use of public-key cryptography standards such as HTTPS/TLS) for e-commerce to take place. As well as confidentiality, the question of availability is also relevant to security. In order to be able to continue to receive orders, _mymuesli_ needs to ensure it has sufficient network defenses to remain available in the event of a denial-of-service (DOS) attack.
 
-# Detailed technical investigation: distributed microservices (~750 words)
+# Conclusion
 
-## Evolution of web services and service-oriented architecture
+_mymuesli_ is a worthwhile example to study in the context of web information systems, partly because its business model is founded upon on web technology but also because it demonstrates how startups without significant investment in legacy enterprise systems have the freedom to adopt an innovative information systems strategy. The internet has enabled the development of new business models (such as SaaS) and accelerated the move towards outsourcing of non-core functions, while the explosion of pay-as-you-go cloud-based hosting has democratised access to infrastructure that was previously only available to large corporations.
 
-(SOA?)
-
-## Challenges of distributed systems
-
-## Analysis and design of microservices
-
-(Virtualisation and containerisation)
+The emergence of microservice architectures is particularly significant in this context. Although it is less of a revolutionary concept than an evolution of existing patterns - some see its roots in the Unix philosophy [@microservices] - along with the RESTful style it continues to challenge a lot of the traditional assumptions about how business information systems are developed and integrated. This can be seen clearly from its adoption within the BBC's own systems.
 
 ## Relevance of study to the British Broadcasting Corporation (BBC)
 
@@ -283,11 +234,5 @@ On the surface _mymuesli_ and the BBC are very different entities. Instead of a 
 - provide an API to allow third parties such as other broadcasters to submit requests for content from the BBC archive to be transcoded to required formats and delivered by file upload or on physical media
 
 Moreover, the BBC could adopt a strategic approach to its information systems, outsourcing functions as needed in order to focus on its core competencies.
-
-# Conclusion
-
-_mymuesli_ is a worthwhile example to study in the context of web information systems, partly because its business model is founded upon on web technology but also because it demonstrates how startups without significant investment in legacy enterprise systems have the freedom to adopt an innovative information systems strategy. The internet has enabled the development of new business models (such as SaaS) and accelerated the move towards outsourcing of non-core functions, while the explosion of pay-as-you-go cloud-based hosting has democratised access to infrastructure that was previously only available to large corporations.
-
-The emergence of microservice architectures is particularly significant in this context. Although it is less of a revolutionary concept than an evolution of existing patterns - some see its roots in the Unix philosophy [@microservices] - along with the RESTful style it continues to challenge a lot of the traditional assumptions about how business information systems are developed and integrated. This can be seen clearly from its adoption within the BBC's own systems.
 
 # References
